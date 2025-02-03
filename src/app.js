@@ -11,7 +11,9 @@ const app=express();
 
 connectDB().then(()=>{
     app.listen(3000,()=>{
+        console.log("App listening on port:3000")
     });
+    console.log("DB connected successfully")
 }).catch((err)=>{
     console.error("Data Base couldn't be connected!!")
 });
