@@ -5,6 +5,9 @@ const requestRouter=express.Router();
 const mongoose=require("mongoose");
 const { User } = require("../models/user");
 
+const sendEmail=require("../utils/sendEmail")
+
+
 requestRouter.post("/request/:status/:userId",userAuth,async (req,res)=>{
 
     try{
@@ -34,10 +37,12 @@ requestRouter.post("/request/:status/:userId",userAuth,async (req,res)=>{
         }
         const connectionRequest= new ConnectionRequestModel({fromUserId,toUserId,status})
         const data=await connectionRequest.save();
-        res.json({message:"Connection Request Sent Successfully!!",data,})
+        
+        res.json({message:"Connection Request Sent Successfully!!",data})
 
     }catch(err)
     {
+        console.log(err)
         res.status(400).send("ERROR:" + err.message)
     }
 })
